@@ -94,7 +94,7 @@ centos-7-base.json
 #### Download terraform
 ```sh
 curl -O https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
-unzip terraform_0.11.13_linux_amd64.zip -d /usr/bin/ && rm terraform_0.11.13_linux_amd64.zip
+unzip terraform_0.11.13_linux_amd64.zip -d /usr/bin/ && rm -rf terraform_0.11.13_linux_amd64.zip
 terraform version
 Terraform v0.11.13
 ```
