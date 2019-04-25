@@ -89,3 +89,64 @@ centos-7-base.json
 +        ]
 ```
 #### If successful, in the packer-centos-7-x86_64/packer-centos-7-x86_64 folder.ova/ will be ova file, packer-centos-7-x86_64.ova
+### 2) Provider preparation and build for ESXI
+#### Download terraform
+```sh
+curl -O https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
+unzip terraform_0.11.13_linux_amd64.zip -d /usr/bin/ && rm terraform_0.11.13_linux_amd64.zip
+terraform version
+Terraform v0.11.13
+```
+#### Install golang
+```sh
+cd /tmp
+curl -O https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.10.3.linux-amd64.tar.gz && rm -rf go1.10.3.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+go version
+go version go1.10.3 linux/amd64
+```
+#### Build provider from ESXi
+```sh
+go get -u -v golang.org/x/crypto/ssh
+go get -u -v github.com/hashicorp/terraform
+go get -u -v github.com/josenk/terraform-provider-esxi
+export GOPATH="$HOME/go"
+cd $GOPATH/src/github.com/josenk/terraform-provider-esxi
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags '-w -extldflags "-static"' -o terraform-provider-esxi_`cat version`
+cp terraform-provider-esxi_`cat version` /usr/bin
+```
+### Usage
+```sh
+cd /root/create-and-deploy-esxi/centos7
+change metadata
+sed -i -e '2d' -e '3i "network": "'$(gzip < network_config.cfg| base64 | tr -d '\n')'",' metadata.json
+terraform init
+Initializing provider plugins...
+
+The following providers do not have any version constraints in configuration,
+so the latest version was installed.
+
+To prevent automatic upgrades to new major versions that may contain breaking
+changes, it is recommended to add version = "..." constraints to the
+corresponding provider blocks in configuration, with the constraint strings
+suggested below.
+
+* provider.esxi: version = "~> 1.4"
+* provider.template: version = "~> 2.1"
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+
+terraform plan
+ 
+terraforn apply
+```
+#### if everything is configured correctly, the virtual machine will be deployed on the esxi host in 2-3 minutes
