@@ -1,0 +1,51 @@
+{
+  "variables": {
+      "esxi_host": "10.10.0.10",
+      "esxi_datastore": "datastore1",
+      "esxi_username": "root",
+      "esxi_password": "passwd-for-esxi-server"
+  },
+  "builders": [
+    {
+      "name": "packer-centos-7-x86_64",
+      "vm_name": "packer-centos-7-x86_64",
+      "type": "vmware-iso",
+      "communicator": "ssh",
+      "ssh_pty": "true",
+      "headless": true,
+      "disk_size": 8192,
+      "guest_os_type": "rhel7-64",
+      "iso_urls": ["./iso/CentOS-7-x86_64-Minimal-1708.iso",
+          "https://mirror.yandex.ru/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1810.iso"],
+      "iso_checksum": "38d5d51d9d100fd73df031ffd6bd8b1297ce24660dc8c13a3b8b4534a4bd291c",
+      "iso_checksum_type": "sha256",
+      "shutdown_command": "sudo -S /usr/sbin/shutdown -h now",
+      "remote_host": "{{user `esxi_host`}}",
+      "remote_datastore": "{{user `esxi_datastore`}}",
+      "remote_username": "{{user `esxi_username`}}",
+      "remote_password": "{{user `esxi_password`}}",
+      "remote_type": "esx5",
+      "format": "ova",
+      "ssh_username": "root",
+      "ssh_password": "cloudPW",
+      "ssh_wait_timeout": "10m",
+      "tools_upload_flavor": "linux",
+      "vnc_disable_password": true,
+      "keep_registered": true,
+      "http_directory": ".",
+      "boot_wait": "7s",
+      "vmx_data": {
+         "ethernet0.networkName": "VM Network"
+      },
+        "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/floppy/centos7.ks<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "provision/centos-7-install-package.sh"
+    }
+  ]
+}
