@@ -45,6 +45,13 @@ unzip packer_1.4.0_linux_amd64.zip -d /usr/bin && rm -rf packer_1.4.0_linux_amd6
 packer version
 Packer v1.4.0
 ```
+### Troubleshooting
+>On some RedHat-based Linux distributions there is another tool named packer installed by default. You can check for this >using which -a packer. If you get an error like this it indicates there is a name conflict.
+```sh
+which -a packer
+/usr/sbin/packer
+```
+>To fix this, you can create a symlink to packer that uses a different name like packer.io, or invoke the packer binary you >want using its absolute path, e.g. /usr/bin/packer.
 ### Download and install ovftool https://www.vmware.com/support/developer/ovf/
 ```sh
 install ovftoos
@@ -61,13 +68,6 @@ Installing VMware OVF Tool component for Linux 4.3.0
 [######################################################################] 100%
 Installation was successful.
 ```
-### Troubleshooting
->On some RedHat-based Linux distributions there is another tool named packer installed by default. You can check for this >using which -a packer. If you get an error like this it indicates there is a name conflict.
-```sh
-which -a packer
-/usr/sbin/packer
-```
->To fix this, you can create a symlink to packer that uses a different name like packer.io, or invoke the packer binary you >want using its absolute path, e.g. /usr/bin/packer.
 
 # Build
 ```sh
