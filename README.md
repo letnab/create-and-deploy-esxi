@@ -120,7 +120,9 @@ cp terraform-provider-esxi_`cat version` /usr/bin
 ### Usage
 ```sh
 cd /root/create-and-deploy-esxi/centos7
-change metadata
+#change file variables.tf
+#change file network_config.cfg
+#run auto replace metadata.json
 sed -i -e '2d' -e '3i "network": "'$(gzip < network_config.cfg| base64 | tr -d '\n')'",' metadata.json
 terraform init
 Initializing provider plugins...
