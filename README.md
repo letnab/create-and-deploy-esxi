@@ -36,8 +36,26 @@ esxcli network firewall refresh
 ```
 For the ISO, either add it to the ./iso directory or let Packer pull it remotely.
 
+### Virtual machine where the build and deployment will take place
+```sh
+centos 7 x86_64 minimal
+yum install unzip git -y
+curl -O https://releases.hashicorp.com/packer/1.4.0/packer_1.4.0_linux_amd64.zip
+unzip packer_1.4.0_linux_amd64.zip -d /usr/bin && rm -rf packer_1.4.0_linux_amd64.zip
+packer version
+Packer v1.4.0
+```
+### Troubleshooting
+>On some RedHat-based Linux distributions there is another tool named packer installed by default. You can check for this >using which -a packer. If you get an error like this it indicates there is a name conflict.
+```sh
+which -a packer
+/usr/sbin/packer
+```
+>To fix this, you can create a symlink to packer that uses a different name like packer.io, or invoke the packer binary you >want using its absolute path, e.g. /usr/bin/packer.
+
 # Build
 ```sh
+git clone https://github.com/letnab/create-and-deploy-esxi.git && cd create-and-deploy-esxi
 packer build centos-7-base.json
 ```
 If for some reason it does not work, you need to replace
