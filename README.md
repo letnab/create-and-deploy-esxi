@@ -43,7 +43,7 @@ yum install unzip git -y
 curl -O https://releases.hashicorp.com/packer/1.3.5/packer_1.3.5_linux_amd64.zip
 unzip packer_1.3.5_linux_amd64.zip -d /usr/bin && rm -rf packer_1.3.5_linux_amd64.zip
 packer version
-Packer v1.4.0
+Packer v1.3.5
 ```
 ### Troubleshooting
 >On some RedHat-based Linux distributions there is another tool named packer installed by default. You can check for this >using which -a packer. If you get an error like this it indicates there is a name conflict.
@@ -89,7 +89,7 @@ centos-7-base.json
 +          "floppy/centos7.ks"
 +        ]
 ```
-#### If successful, in the packer-centos-7-x86_64/packer-centos-7-x86_64 folder.ova/ will be ova file, packer-centos-7-x86_64.ova
+#### If successful, in the output-packer-centos-7-x86_64/ folder.ova/ will be ova file, packer-centos-7-x86_64.ova
 ### 2) Provider preparation and build for ESXI
 #### Download terraform
 ```sh
