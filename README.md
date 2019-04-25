@@ -45,6 +45,22 @@ unzip packer_1.4.0_linux_amd64.zip -d /usr/bin && rm -rf packer_1.4.0_linux_amd6
 packer version
 Packer v1.4.0
 ```
+### Download and install ovftool https://www.vmware.com/support/developer/ovf/
+```sh
+install ovftoos
+./VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle
+Extracting VMware Installer...done.
+You must accept the VMware OVF Tool component for Linux End User
+License Agreement to continue.  Press Enter to proceed.
+VMWARE END USER LICENSE AGREEMENT
+Do you agree? [yes/no]:yes
+The product is ready to be installed.  Press Enter to begin
+installation or Ctrl-C to cancel. 
+Installing VMware OVF Tool component for Linux 4.3.0
+    Configuring...
+[######################################################################] 100%
+Installation was successful.
+```
 ### Troubleshooting
 >On some RedHat-based Linux distributions there is another tool named packer installed by default. You can check for this >using which -a packer. If you get an error like this it indicates there is a name conflict.
 ```sh
@@ -72,3 +88,4 @@ centos-7-base.json
 +          "floppy/centos7.ks"
 +        ]
 ```
+#### If successful, in the packer-centos-7-x86_64/packer-centos-7-x86_64 folder.ova/ will be ova file, packer-centos-7-x86_64.ova
