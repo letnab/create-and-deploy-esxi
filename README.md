@@ -40,8 +40,8 @@ For the ISO, either add it to the ./iso directory or let Packer pull it remotely
 ```sh
 centos 7 x86_64 minimal
 yum install unzip git -y
-curl -O https://releases.hashicorp.com/packer/1.4.0/packer_1.4.0_linux_amd64.zip
-unzip packer_1.4.0_linux_amd64.zip -d /usr/bin && rm -rf packer_1.4.0_linux_amd64.zip
+curl -O https://releases.hashicorp.com/packer/1.3.5/packer_1.3.5_linux_amd64.zip
+unzip packer_1.3.5_linux_amd64.zip -d /usr/bin && rm -rf packer_1.3.5_linux_amd64.zip
 packer version
 Packer v1.4.0
 ```
