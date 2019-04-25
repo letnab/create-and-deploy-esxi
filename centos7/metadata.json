@@ -1,0 +1,6 @@
+{
+"network": "gzip+base64",
+  "network.encoding": "gzip+base64",
+  "local-hostname": "${HOSTNAME}",
+  "instance-id": "cloud-vm"
+}
