@@ -55,6 +55,7 @@ which -a packer
 ### Download and install ovftool https://www.vmware.com/support/developer/ovf/
 ```sh
 install ovftoos
+chmod +x VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle
 ./VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle
 Extracting VMware Installer...done.
 You must accept the VMware OVF Tool component for Linux End User
