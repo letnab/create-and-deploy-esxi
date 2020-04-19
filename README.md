@@ -40,8 +40,8 @@ For the ISO, either add it to the ./iso directory or let Packer pull it remotely
 ```sh
 centos 7 x86_64 minimal (selinux disabled)
 yum install unzip git -y
-curl -O https://releases.hashicorp.com/packer/1.3.5/packer_1.3.5_linux_amd64.zip
-unzip packer_1.3.5_linux_amd64.zip -d /usr/bin && rm -rf packer_1.3.5_linux_amd64.zip
+curl -O https://releases.hashicorp.com/packer/1.5.5/packer_1.5.5_linux_amd64.zip
+unzip packer_1.5.5_linux_amd64.zip -d /usr/bin && rm -rf packer_1.5.5_linux_amd64.zip
 packer version
 Packer v1.3.5
 ```
@@ -55,16 +55,16 @@ which -a packer
 ### Download and install ovftool https://www.vmware.com/support/developer/ovf/
 ```sh
 install ovftoos
-chmod +x VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle
-./VMware-ovftool-4.3.0-7948156-lin.x86_64.bundle
+chmod +x VMware-ovftool-4.4.0-15722219-lin.x86_64.bundle
+./VMware-ovftool-4.4.0-15722219-lin.x86_64.bundle
 Extracting VMware Installer...done.
 You must accept the VMware OVF Tool component for Linux End User
 License Agreement to continue.  Press Enter to proceed.
 VMWARE END USER LICENSE AGREEMENT
 Do you agree? [yes/no]:yes
 The product is ready to be installed.  Press Enter to begin
-installation or Ctrl-C to cancel. 
-Installing VMware OVF Tool component for Linux 4.3.0
+installation or Ctrl-C to cancel.
+Installing VMware OVF Tool component for Linux 4.4.0
     Configuring...
 [######################################################################] 100%
 Installation was successful.
@@ -81,7 +81,7 @@ centos-7-base.json
 - "boot_command": [
 -        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/floppy/centos7.ks<enter><wait>"
 -      ]
-      
+
 +       "boot_command": [
 +            "<tab> text biosdevname=0 net.ifnames=0 ks=hd:fd0:/centos7.ks<enter><wait>"
 +        ],
@@ -93,19 +93,19 @@ centos-7-base.json
 ### 2) Provider preparation and build for ESXI
 #### Download terraform
 ```sh
-curl -O https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
-unzip terraform_0.11.13_linux_amd64.zip -d /usr/bin/ && rm -rf terraform_0.11.13_linux_amd64.zip
+curl -O https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
+unzip terraform_0.12.24_linux_amd64.zip -d /usr/bin/ && rm -rf terraform_0.12.24_linux_amd64.zip
 terraform version
-Terraform v0.11.13
+Terraform v0.12.24
 ```
 #### Install golang
 ```sh
 cd /tmp
-curl -O https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.10.3.linux-amd64.tar.gz && rm -rf go1.10.3.linux-amd64.tar.gz
+curl -O https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.14.2.linux-amd64.tar.gz && rm -rf go1.14.2.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 go version
-go version go1.10.3 linux/amd64
+go version go1.14.2 linux/amd64
 ```
 #### Build provider from ESXi
 ```sh
@@ -135,7 +135,7 @@ changes, it is recommended to add version = "..." constraints to the
 corresponding provider blocks in configuration, with the constraint strings
 suggested below.
 
-* provider.esxi: version = "~> 1.4"
+* provider.esxi: version = "~> 1.6"
 * provider.template: version = "~> 2.1"
 
 Terraform has been successfully initialized!
@@ -149,7 +149,7 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 
 terraform plan
- 
+
 terraforn apply
 ```
 #### if everything is configured correctly, the virtual machine will be deployed on the esxi host in 2-3 minutes
