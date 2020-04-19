@@ -125,6 +125,8 @@ cd /root/create-and-deploy-esxi/centos7
 #run auto replace metadata.json
 sed -i -e '2d' -e '3i "network": "'$(gzip < network_config.cfg| base64 | tr -d '\n')'",' metadata.json
 terraform init
+Initializing the backend...
+
 Initializing provider plugins...
 
 The following providers do not have any version constraints in configuration,
